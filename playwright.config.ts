@@ -1,0 +1,23 @@
+import { defineConfig, devices } from '@playwright/test';
+
+export default defineConfig({
+  testDir: './e2e',
+  testMatch: '**/*.spec.ts',
+  use: {
+    baseURL: 'http://localhost:3000',
+    headless: true,
+    trace: 'on-first-retry'
+  },
+  projects: [
+    {
+      name: 'chromium',
+      use: { ...devices['Desktop Chrome'] }
+    }
+  ],
+  webServer: {
+    command: 'node dist/src/server.js',
+    url: 'http://localhost:3000',
+    reuseExistingServer: true,
+    timeout: 10000
+  }
+});
