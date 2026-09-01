@@ -5,14 +5,14 @@
       "name": "Rafael Silva",
       "phone": "+55 11 91111-2222",
       "commission_pct": 50,
-      "created_at": "2026-08-29T14:37:46.816Z"
+      "created_at": "2026-09-01T13:08:00.631Z"
     },
     {
       "id": "barber-joao",
       "name": "João Carlos",
       "phone": "+55 11 93333-4444",
       "commission_pct": 50,
-      "created_at": "2026-08-29T14:37:46.817Z"
+      "created_at": "2026-09-01T13:08:00.631Z"
     }
   ],
   "customers": [
@@ -20,37 +20,37 @@
       "id": "cust-1",
       "name": "Pedro Henrique",
       "phone": "+55 11 98765-4321",
-      "avg_interval_days": 9,
-      "days_passed": 0,
-      "status": "EM_DIA",
-      "last_service_date": "2026-09-01T13:07:47.065Z",
-      "cold_start_phase": 3,
+      "avg_interval_days": 21,
+      "days_passed": 21,
+      "status": "NA_JANELA",
+      "last_service_date": "2026-08-08T10:00:00.000Z",
+      "cold_start_phase": 1,
       "preferred_barber_id": "barber-rafael",
-      "created_at": "2026-08-29T14:37:46.817Z"
+      "created_at": "2026-09-01T13:08:00.631Z"
     },
     {
       "id": "cust-2",
       "name": "Lucas Mendes",
       "phone": "+55 11 97654-3210",
       "avg_interval_days": 25,
-      "days_passed": 73,
-      "status": "PERDIDO",
+      "days_passed": 31,
+      "status": "EM_RISCO",
       "last_service_date": "2026-07-29T10:00:00.000Z",
       "cold_start_phase": 1,
       "preferred_barber_id": "barber-rafael",
-      "created_at": "2026-08-29T14:37:46.817Z"
+      "created_at": "2026-09-01T13:08:00.631Z"
     },
     {
       "id": "cust-3",
       "name": "Marcelo Oliveira",
       "phone": "+55 11 96543-2109",
       "avg_interval_days": 30,
-      "days_passed": 94,
+      "days_passed": 52,
       "status": "PERDIDO",
       "last_service_date": "2026-07-08T10:00:00.000Z",
       "cold_start_phase": 1,
       "preferred_barber_id": "barber-joao",
-      "created_at": "2026-08-29T14:37:46.817Z"
+      "created_at": "2026-09-01T13:08:00.631Z"
     }
   ],
   "haircutSpecs": [
@@ -66,161 +66,10 @@
       "finish_guard": "Navalha",
       "products_used": "[\"Pomada Matte BarberMe\",\"Óleo de Barba\"]",
       "notes": "Redemoinho acentuado na coroa.",
-      "created_at": "2026-08-29T14:37:46.818Z"
-    },
-    {
-      "id": "spec-1788014524885",
-      "customer_id": "cust-1",
-      "barber_id": "barber-rafael",
-      "appointment_id": "apt-1788014524884",
-      "photo_before_url": "assets/img/corte_1.jpg",
-      "photo_after_url": "assets/img/corte_1.jpg",
-      "top_guard": "Tesoura (3cm - Pompadour)",
-      "sides_guard": "Pente 1.5 (Mid Fade)",
-      "finish_guard": "Navalha",
-      "products_used": "[\"Pomada Matte BarberMe\",\"Balm Alinhador\"]",
-      "notes": "Corte executado no balcão em 20 segundos.",
-      "created_at": "2026-08-29T14:42:04.882Z"
-    },
-    {
-      "id": "spec-1788267906857",
-      "customer_id": "cust-1",
-      "barber_id": "barber-rafael",
-      "appointment_id": "apt-1788267906856",
-      "photo_before_url": "assets/img/corte_1.jpg",
-      "photo_after_url": "assets/img/corte_1.jpg",
-      "top_guard": "Tesoura (3cm - Pompadour)",
-      "sides_guard": "Pente 1.5 (Mid Fade)",
-      "finish_guard": "Navalha",
-      "products_used": "[\"Pomada Matte BarberMe\",\"Balm Alinhador\"]",
-      "notes": "Corte executado no balcão em 20 segundos.",
-      "created_at": "2026-09-01T13:05:06.856Z"
-    },
-    {
-      "id": "spec-1788267929550",
-      "customer_id": "cust-1",
-      "barber_id": "barber-rafael",
-      "appointment_id": "apt-1788267929550",
-      "photo_before_url": "assets/img/corte_1.jpg",
-      "photo_after_url": "assets/img/corte_1.jpg",
-      "top_guard": "Tesoura (3cm - Pompadour)",
-      "sides_guard": "Pente 1.5 (Mid Fade)",
-      "finish_guard": "Navalha",
-      "products_used": "[\"Pomada Matte BarberMe\",\"Balm Alinhador\"]",
-      "notes": "Corte executado no balcão em 20 segundos.",
-      "created_at": "2026-09-01T13:05:29.550Z"
-    },
-    {
-      "id": "spec-1788268003326",
-      "customer_id": "cust-1",
-      "barber_id": "barber-rafael",
-      "appointment_id": "apt-1788268003326",
-      "photo_before_url": "assets/img/corte_1.jpg",
-      "photo_after_url": "assets/img/corte_1.jpg",
-      "top_guard": "Tesoura (3cm - Pompadour)",
-      "sides_guard": "Pente 1.5 (Mid Fade)",
-      "finish_guard": "Navalha",
-      "products_used": "[\"Pomada Matte BarberMe\",\"Balm Alinhador\"]",
-      "notes": "Corte executado no balcão em 20 segundos.",
-      "created_at": "2026-09-01T13:06:43.326Z"
-    },
-    {
-      "id": "spec-1788268020275",
-      "customer_id": "cust-1",
-      "barber_id": "barber-rafael",
-      "appointment_id": "apt-1788268020275",
-      "photo_before_url": "assets/img/corte_1.jpg",
-      "photo_after_url": "assets/img/corte_1.jpg",
-      "top_guard": "Tesoura (3cm - Pompadour)",
-      "sides_guard": "Pente 1.5 (Mid Fade)",
-      "finish_guard": "Navalha",
-      "products_used": "[\"Pomada Matte BarberMe\",\"Balm Alinhador\"]",
-      "notes": "Corte executado no balcão em 20 segundos.",
-      "created_at": "2026-09-01T13:07:00.275Z"
-    },
-    {
-      "id": "spec-1788268067065",
-      "customer_id": "cust-1",
-      "barber_id": "barber-rafael",
-      "appointment_id": "apt-1788268067065",
-      "photo_before_url": "assets/img/corte_1.jpg",
-      "photo_after_url": "assets/img/corte_1.jpg",
-      "top_guard": "Tesoura (3cm - Pompadour)",
-      "sides_guard": "Pente 1.5 (Mid Fade)",
-      "finish_guard": "Navalha",
-      "products_used": "[\"Pomada Matte BarberMe\",\"Balm Alinhador\"]",
-      "notes": "Corte executado no balcão em 20 segundos.",
-      "created_at": "2026-09-01T13:07:47.065Z"
+      "created_at": "2026-09-01T13:08:00.631Z"
     }
   ],
-  "appointments": [
-    {
-      "id": "apt-1788014524884",
-      "customer_id": "cust-1",
-      "barber_id": "barber-rafael",
-      "scheduled_at": "2026-08-29T14:42:04.882Z",
-      "completed_at": "2026-08-29T14:42:04.882Z",
-      "price": 70,
-      "barber_earned": 35,
-      "status": "COMPLETED",
-      "created_at": "2026-08-29T14:42:04.882Z"
-    },
-    {
-      "id": "apt-1788267906856",
-      "customer_id": "cust-1",
-      "barber_id": "barber-rafael",
-      "scheduled_at": "2026-09-01T13:05:06.856Z",
-      "completed_at": "2026-09-01T13:05:06.856Z",
-      "price": 70,
-      "barber_earned": 35,
-      "status": "COMPLETED",
-      "created_at": "2026-09-01T13:05:06.856Z"
-    },
-    {
-      "id": "apt-1788267929550",
-      "customer_id": "cust-1",
-      "barber_id": "barber-rafael",
-      "scheduled_at": "2026-09-01T13:05:29.550Z",
-      "completed_at": "2026-09-01T13:05:29.550Z",
-      "price": 70,
-      "barber_earned": 35,
-      "status": "COMPLETED",
-      "created_at": "2026-09-01T13:05:29.550Z"
-    },
-    {
-      "id": "apt-1788268003326",
-      "customer_id": "cust-1",
-      "barber_id": "barber-rafael",
-      "scheduled_at": "2026-09-01T13:06:43.326Z",
-      "completed_at": "2026-09-01T13:06:43.326Z",
-      "price": 70,
-      "barber_earned": 35,
-      "status": "COMPLETED",
-      "created_at": "2026-09-01T13:06:43.326Z"
-    },
-    {
-      "id": "apt-1788268020275",
-      "customer_id": "cust-1",
-      "barber_id": "barber-rafael",
-      "scheduled_at": "2026-09-01T13:07:00.275Z",
-      "completed_at": "2026-09-01T13:07:00.275Z",
-      "price": 70,
-      "barber_earned": 35,
-      "status": "COMPLETED",
-      "created_at": "2026-09-01T13:07:00.275Z"
-    },
-    {
-      "id": "apt-1788268067065",
-      "customer_id": "cust-1",
-      "barber_id": "barber-rafael",
-      "scheduled_at": "2026-09-01T13:07:47.065Z",
-      "completed_at": "2026-09-01T13:07:47.065Z",
-      "price": 70,
-      "barber_earned": 35,
-      "status": "COMPLETED",
-      "created_at": "2026-09-01T13:07:47.065Z"
-    }
-  ],
+  "appointments": [],
   "subscriptions": [
     {
       "id": "sub-1",
@@ -231,7 +80,7 @@
       "cuts_remaining": 2,
       "status": "ACTIVE",
       "renews_at": "2026-09-08T00:00:00.000Z",
-      "created_at": "2026-08-29T14:37:46.818Z"
+      "created_at": "2026-09-01T13:08:00.631Z"
     }
   ]
 }
