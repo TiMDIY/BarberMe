@@ -1,5 +1,5 @@
 // BarberMe - WhatsApp Automation Worker & 1-Tap Booking Dispatcher
-import { db, CustomerRecord, CustomerStatus } from '../db/index.js';
+import { CustomerRecord, CustomerStatus } from '../db/index.js';
 import { clockEngine } from '../engine/clock-engine.js';
 
 export interface WhatsAppDispatchPayload {

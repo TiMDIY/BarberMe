@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach } from 'vitest';
-import { db, seedTestData } from '../src/db/index.js';
+import { seedTestData } from '../src/db/index.js';
 import { AdminAnalyticsService } from '../src/services/admin-analytics.js';
 import { barberCheckoutService } from '../src/services/barber-checkout.js';
 

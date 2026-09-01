@@ -1,5 +1,5 @@
 // BarberMe - Multi-Tenant Security & Isolation Guard
-import { db, CustomerRecord } from '../db/index.js';
+import { CustomerRecord } from '../db/index.js';
 
 export interface TenantContext {
   tenantId: string;

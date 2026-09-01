@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach } from 'vitest';
-import { db, seedTestData } from '../src/db/index.js';
+import { seedTestData } from '../src/db/index.js';
 import { BarberCheckoutService } from '../src/services/barber-checkout.js';
 
 describe('Ticket 03: Ficha Técnica do Corte & Fluxo de Balcão do Barbeiro', () => {

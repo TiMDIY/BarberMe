@@ -7,9 +7,13 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install --no-audit
 
-# Copiar código fonte e compilar
-COPY tsconfig.json ./
+# Copiar arquivos de configuração e código fonte completo para o build
+COPY tsconfig.json vitest.config.ts .dependency-cruiser.cjs ./
 COPY src/ ./src
+COPY tests/ ./tests
+COPY scripts/ ./scripts
+
+# Compilar aplicação em dist/
 RUN npm run build
 
 # Etapa 2: Imagem final de Produção
@@ -20,7 +24,7 @@ ENV NODE_ENV=production
 ENV PORT=3000
 
 COPY package*.json ./
-RUN npm install --only=production --no-audit
+RUN npm install --omit=dev --no-audit
 
 COPY --from=builder /app/dist ./dist
 COPY index.html styles.css app.js ./

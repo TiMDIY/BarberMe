@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach } from 'vitest';
-import { db, seedTestData } from '../src/db/index.js';
+import { seedTestData } from '../src/db/index.js';
 import { WhatsAppAutomationService } from '../src/services/whatsapp-automation.js';
 
 describe('Ticket 04: Motor de Automações & Disparos no WhatsApp (WhatsApp-First)', () => {

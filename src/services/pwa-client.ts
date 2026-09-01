@@ -27,7 +27,7 @@ export class PWAClientService {
       const [customerId, tsStr] = decoded.split(':');
       if (!customerId || !tsStr) throw new Error('Token formato inválido');
       return { customerId, timestamp: parseInt(tsStr, 10) };
-    } catch (err) {
+    } catch (_err) {
       throw new Error('Token de confirmação inválido ou expirado');
     }
   }
