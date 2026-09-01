@@ -13,6 +13,7 @@
     "test:unit": "npx vitest run tests/clock-engine.test.ts tests/db.test.ts",
     "test:integration": "npx vitest run tests/server.test.ts tests/subscription.test.ts tests/whatsapp-automation.test.ts tests/pwa-client.test.ts tests/admin-analytics.test.ts",
     "test:tenant": "npx vitest run tests/tenant-security.test.ts",
+    "test:bdd": "npx tsx node_modules/@cucumber/cucumber/bin/cucumber.js",
     "test:migrations": "npx tsx scripts/migration-schema-check.ts",
     "build": "npx tsc",
     "test:e2e": "npx playwright test",
@@ -29,6 +30,7 @@
   "license": "ISC",
   "type": "module",
   "devDependencies": {
+    "@cucumber/cucumber": "^12.9.0",
     "@playwright/test": "^1.62.1",
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.6",
@@ -44,7 +46,7 @@
     "prettier": "^3.9.6",
     "prisma": "^8.0.0-rc.12",
     "supertest": "^7.2.2",
-    "tsx": "^4.23.12",
+    "tsx": "^4.23.13",
     "typescript": "^5.9.3",
     "vitest": "^4.1.11"
   },

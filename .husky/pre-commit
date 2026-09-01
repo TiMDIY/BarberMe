@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-echo "🛡️ Executando Validação Estrita do Pipeline CI (0 Warnings & 8 Estágios)..."
+echo "🛡️ Executando Validação Estrita do Pipeline CI (0 Warnings, BDD & 8 Estágios)..."
 
 # 1. Estágio Lint (max-warnings 0)
 npm run lint || { echo "❌ Bloqueado pelo Husky: O código contém avisos ou erros de linting!"; exit 1; }
@@ -9,22 +9,25 @@ npm run lint || { echo "❌ Bloqueado pelo Husky: O código contém avisos ou er
 # 2. Estágio Typecheck
 npm run typecheck || { echo "❌ Bloqueado pelo Husky: Falha no typecheck do TypeScript!"; exit 1; }
 
-# 3. Estágio Unit Tests
+# 3. Estágio BDD Specifications (Cucumber Gherkin em Português)
+npm run test:bdd || { echo "❌ Bloqueado pelo Husky: Especificações BDD (Gherkin) falharam!"; exit 1; }
+
+# 4. Estágio Unit Tests
 npm run test:unit || { echo "❌ Bloqueado pelo Husky: Testes unitários falharam!"; exit 1; }
 
-# 4. Estágio Integration Tests
+# 5. Estágio Integration Tests
 npm run test:integration || { echo "❌ Bloqueado pelo Husky: Testes de integração falharam!"; exit 1; }
 
-# 5. Estágio Tenant & Security Guard
+# 6. Estágio Tenant & Security Guard
 npm run arch:check || { echo "❌ Bloqueado pelo Husky: Violação de limites de Clean Architecture!"; exit 1; }
 npm run test:tenant || { echo "❌ Bloqueado pelo Husky: Falha no teste de segurança multi-tenant!"; exit 1; }
 
-# 6. Estágio Migrations & Schema Check
+# 7. Estágio Migrations & Schema Check
 npm run schema:check || { echo "❌ Bloqueado pelo Husky: Desvio de schema de dados!"; exit 1; }
 npm run test:migrations || { echo "❌ Bloqueado pelo Husky: Falha na validação de migrações!"; exit 1; }
 
-# 7. Estágio Build & Performance Budget
+# 8. Estágio Build & Performance Budget
 npm run build || { echo "❌ Bloqueado pelo Husky: Falha na compilação do projeto!"; exit 1; }
 npm run budget:check || { echo "❌ Bloqueado pelo Husky: Orçamento de tamanho de bundle excedido!"; exit 1; }
 
-echo "✅ Todos os portões de qualidade passaram com ZERO avisos! Liberando commit."
+echo "✅ Todos os portões de qualidade e especificações BDD passaram com ZERO avisos! Liberando commit."
