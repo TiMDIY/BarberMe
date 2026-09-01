@@ -3,9 +3,9 @@ FROM node:22-alpine AS builder
 
 WORKDIR /app
 
-# Copiar manifesto de dependências
+# Copiar manifesto de dependências e instalar sem disparar scripts gyp/nativos
 COPY package*.json ./
-RUN npm install --no-audit
+RUN npm install --no-audit --ignore-scripts
 
 # Copiar arquivos de configuração e código fonte completo para o build
 COPY tsconfig.json vitest.config.ts .dependency-cruiser.cjs ./
@@ -24,7 +24,7 @@ ENV NODE_ENV=production
 ENV PORT=3000
 
 COPY package*.json ./
-RUN npm install --omit=dev --no-audit
+RUN npm install --omit=dev --no-audit --ignore-scripts
 
 COPY --from=builder /app/dist ./dist
 COPY index.html styles.css app.js ./
