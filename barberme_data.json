@@ -1,0 +1,86 @@
+{
+  "barbers": [
+    {
+      "id": "barber-rafael",
+      "name": "Rafael Silva",
+      "phone": "+55 11 91111-2222",
+      "commission_pct": 50,
+      "created_at": "2026-08-31T17:14:28.612Z"
+    },
+    {
+      "id": "barber-joao",
+      "name": "João Carlos",
+      "phone": "+55 11 93333-4444",
+      "commission_pct": 50,
+      "created_at": "2026-08-31T17:14:28.612Z"
+    }
+  ],
+  "customers": [
+    {
+      "id": "cust-1",
+      "name": "Pedro Henrique",
+      "phone": "+55 11 98765-4321",
+      "avg_interval_days": 21,
+      "days_passed": 21,
+      "status": "NA_JANELA",
+      "last_service_date": "2026-08-08T10:00:00.000Z",
+      "cold_start_phase": 1,
+      "preferred_barber_id": "barber-rafael",
+      "created_at": "2026-08-31T17:14:28.612Z"
+    },
+    {
+      "id": "cust-2",
+      "name": "Lucas Mendes",
+      "phone": "+55 11 97654-3210",
+      "avg_interval_days": 25,
+      "days_passed": 31,
+      "status": "EM_RISCO",
+      "last_service_date": "2026-07-29T10:00:00.000Z",
+      "cold_start_phase": 1,
+      "preferred_barber_id": "barber-rafael",
+      "created_at": "2026-08-31T17:14:28.612Z"
+    },
+    {
+      "id": "cust-3",
+      "name": "Marcelo Oliveira",
+      "phone": "+55 11 96543-2109",
+      "avg_interval_days": 30,
+      "days_passed": 52,
+      "status": "PERDIDO",
+      "last_service_date": "2026-07-08T10:00:00.000Z",
+      "cold_start_phase": 1,
+      "preferred_barber_id": "barber-joao",
+      "created_at": "2026-08-31T17:14:28.612Z"
+    }
+  ],
+  "haircutSpecs": [
+    {
+      "id": "spec-1",
+      "customer_id": "cust-1",
+      "barber_id": "barber-rafael",
+      "appointment_id": null,
+      "photo_before_url": "assets/img/corte_1.jpg",
+      "photo_after_url": "assets/img/corte_1.jpg",
+      "top_guard": "Tesoura (3cm - Pompadour)",
+      "sides_guard": "Pente 1.5 (Mid Fade)",
+      "finish_guard": "Navalha",
+      "products_used": "[\"Pomada Matte BarberMe\",\"Óleo de Barba\"]",
+      "notes": "Redemoinho acentuado na coroa.",
+      "created_at": "2026-08-31T17:14:28.612Z"
+    }
+  ],
+  "appointments": [],
+  "subscriptions": [
+    {
+      "id": "sub-1",
+      "customer_id": "cust-1",
+      "plan_name": "Clube da Barba Prime (2x/mês)",
+      "monthly_price": 69.9,
+      "cuts_per_month": 2,
+      "cuts_remaining": 2,
+      "status": "ACTIVE",
+      "renews_at": "2026-09-08T00:00:00.000Z",
+      "created_at": "2026-08-31T17:14:28.612Z"
+    }
+  ]
+}

@@ -1,0 +1,110 @@
+name: BarberMe Industrial CI Pipeline
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  # Job 1: Clean Architecture & Code Quality Enforcement (Uncle Bob)
+  architecture-and-clean-code:
+    name: 🏛️ Clean Architecture & Code Quality (Uncle Bob)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout do Repositório
+        uses: actions/checkout@v4
+
+      - name: ⚙️ Setup Node.js (v22)
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'npm'
+
+      - name: 📦 Instalar Dependências
+        run: npm ci
+
+      - name: 🛑 Verificar Regra de Dependências Arquiteturais (Clean Boundaries)
+        run: npm run arch:check
+
+      - name: 📏 Verificar Complexidade Ciclomática & Clean Code (ESLint)
+        run: npm run lint
+
+      - name: 🏗️ Compilar TypeScript (tsc)
+        run: npm run build
+
+  # Job 2: Vitest Test Suite & Coverage Gate (>80%) (Martin Fowler)
+  test-and-coverage:
+    name: 🧪 Tests & Coverage Gate >80% (Martin Fowler)
+    runs-on: ubuntu-latest
+    needs: architecture-and-clean-code
+
+    steps:
+      - name: 📥 Checkout do Repositório
+        uses: actions/checkout@v4
+
+      - name: ⚙️ Setup Node.js (v22)
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'npm'
+
+      - name: 📦 Instalar Dependências
+        run: npm ci
+
+      - name: 📊 Executar Suíte de Testes com Portão de Cobertura de Código
+        run: npm run test:coverage
+
+  # Job 3: Web Performance Budget & Data Schema Integrity (Addy Osmani & Nygard)
+  performance-and-schema:
+    name: ⚡ Performance Budget & Data Schema Gate (Osmani & Nygard)
+    runs-on: ubuntu-latest
+    needs: architecture-and-clean-code
+
+    steps:
+      - name: 📥 Checkout do Repositório
+        uses: actions/checkout@v4
+
+      - name: ⚙️ Setup Node.js (v22)
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'npm'
+
+      - name: 📦 Instalar Dependências
+        run: npm ci
+
+      - name: ⚡ Checar Orçamento de Performance Web (< 250KB)
+        run: npm run budget:check
+
+      - name: 🗄️ Validar Schema de Dados e Contratos Imutáveis
+        run: npm run schema:check
+
+  # Job 4: Container Build & Live Production Smoke Test (Gene Kim & Jez Humble)
+  smoke-test-and-docker:
+    name: 🐳 Production Parity Build & Smoke Test (Gene Kim & Jez Humble)
+    runs-on: ubuntu-latest
+    needs: [test-and-coverage, performance-and-schema]
+
+    steps:
+      - name: 📥 Checkout do Repositório
+        uses: actions/checkout@v4
+
+      - name: ⚙️ Setup Node.js (v22)
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'npm'
+
+      - name: 📦 Instalar Dependências
+        run: npm ci
+
+      - name: 🏗️ Compilar Projeto
+        run: npm run build
+
+      - name: 🔥 Executar Teste de Fumaça em Tempo Real (Smoke Test)
+        run: npm run smoke
+
+      - name: 🐳 Validar Build da Imagem Docker de Produção
+        run: docker build -t barberme:latest .

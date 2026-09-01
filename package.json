@@ -1,0 +1,52 @@
+{
+  "name": "barberme",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "start": "node dist/src/server.js",
+    "dev": "npx tsx src/server.ts",
+    "build": "npx tsc",
+    "typecheck": "npx tsc --noEmit",
+    "lint": "eslint src/ tests/",
+    "arch:check": "depcruise --config .dependency-cruiser.cjs src",
+    "budget:check": "npx tsx scripts/bundle-budget-check.ts",
+    "schema:check": "npx tsx scripts/data-schema-check.ts",
+    "smoke": "npx tsx scripts/smoke-test.ts",
+    "test": "npx vitest run",
+    "test:coverage": "npx vitest run --coverage",
+    "prepare": "husky"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/node": "^26.4.0",
+    "@types/supertest": "^7.2.1",
+    "@typescript-eslint/eslint-plugin": "^8.68.0",
+    "@typescript-eslint/parser": "^8.68.0",
+    "@vitest/coverage-v8": "^4.1.11",
+    "dependency-cruiser": "^17.4.3",
+    "eslint": "^10.9.1",
+    "husky": "^9.1.7",
+    "lint-staged": "^17.4.1",
+    "prettier": "^3.9.6",
+    "prisma": "^8.0.0-rc.12",
+    "supertest": "^7.2.2",
+    "tsx": "^4.23.12",
+    "typescript": "^5.9.3",
+    "vitest": "^4.1.11"
+  },
+  "dependencies": {
+    "@prisma/client": "^7.10.0",
+    "better-sqlite3": "^13.0.3",
+    "cors": "^2.8.6",
+    "express": "^5.2.1"
+  }
+}

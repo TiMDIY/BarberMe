@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BarberMe - Motor de Recorrência & Retenção para Barbearias</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="header-container">
+      <div class="logo-group">
+        <div class="logo-icon">✂️</div>
+        <div class="logo-text">
+          <h1>BarberMe</h1>
+          <p>Motor de Recorrência & Retenção de Clientes</p>
+        </div>
+      </div>
+      <div class="header-actions">
+        <button class="sim-btn" id="btn-advance-7">
+          <i class="fas fa-forward"></i> Avançar 7 Dias no Tempo
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Navigation Tabs -->
+  <nav class="nav-tabs">
+    <button class="tab-btn active" data-tab="engine">
+      <i class="fas fa-microchip"></i> Motor & Automações
+      <span class="tab-badge">Engine</span>
+    </button>
+    <button class="tab-btn" data-tab="cliente">
+      <i class="fas fa-mobile-alt"></i> Visão do Cliente
+      <span class="tab-badge">PWA + WA</span>
+    </button>
+    <button class="tab-btn" data-tab="barbeiro">
+      <i class="fas fa-cut"></i> Visão do Barbeiro
+      <span class="tab-badge">App Balcão</span>
+    </button>
+    <button class="tab-btn" data-tab="admin">
+      <i class="fas fa-chart-line"></i> Visão do Dono
+      <span class="tab-badge">Web Analytics</span>
+    </button>
+  </nav>
+
+  <!-- Main Content Areas -->
+  <main>
+
+    <!-- TAB 1: MOTOR & AUTOMAÇÕES -->
+    <section id="view-engine" class="view-section active">
+      <!-- Metrics Overview -->
+      <div class="grid-4" style="margin-bottom: 24px;">
+        <div class="stat-card emerald">
+          <span class="stat-label">Clientes no Relógio Ativo</span>
+          <span class="stat-value">342</span>
+          <span class="stat-sub"><i class="fas fa-check-circle"></i> 94% monitorados em tempo real</span>
+        </div>
+        <div class="stat-card amber">
+          <span class="stat-label">Clientes Na Janela de Recompra</span>
+          <span class="stat-value">18</span>
+          <span class="stat-sub warning"><i class="fas fa-bell"></i> Disparos prontos esta semana</span>
+        </div>
+        <div class="stat-card rose">
+          <span class="stat-label">Clientes em Risco (Janela +15d)</span>
+          <span class="stat-value">5</span>
+          <span class="stat-sub warning"><i class="fas fa-exclamation-triangle"></i> Alerta de Churn Invisível</span>
+        </div>
+        <div class="stat-card blue">
+          <span class="stat-label">Intervalo Médio da Base</span>
+          <span class="stat-value">22.4 dias</span>
+          <span class="stat-sub"><i class="fas fa-clock"></i> Previsibilidade alta</span>
+        </div>
+      </div>
+
+      <!-- Table Card -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">
+            <i class="fas fa-hourglass-half"></i> Monitor do Relógio dos Clientes
+          </div>
+          <span style="font-size: 13px; color: var(--text-muted);">Sensoriamento em Tempo Real</span>
+        </div>
+        <div class="table-responsive">
+          <table>
+            <thead>
+              <tr>
+                <th>Cliente</th>
+                <th>Relógio Biológico (Dias / Intervalo)</th>
+                <th>Estado do Cliente</th>
+                <th>Barbeiro Preferido</th>
+                <th>Ações de Automação</th>
+              </tr>
+            </thead>
+            <tbody id="engine-table-body">
+              <!-- Rendered via JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 2: VISÃO DO CLIENTE (PWA + WHATSAPP) -->
+    <section id="view-cliente" class="view-section">
+      <div class="grid-2">
+        <!-- Phone Mockup WhatsApp -->
+        <div>
+          <h3 style="margin-bottom:16px;color:#fff;display:flex;align-items:center;gap:10px;">
+            <i class="fab fa-whatsapp" style="color:#00a884;"></i> Experiência no WhatsApp (Zero Friction)
+          </h3>
+          <div class="phone-mockup">
+            <div class="phone-notch"></div>
+            <div class="phone-header">
+              <div class="phone-header-avatar">B</div>
+              <div class="phone-header-info">
+                <h4>BarberMe • Barbearia Premium</h4>
+                <p>Conta comercial oficial</p>
+              </div>
+            </div>
+            <div class="phone-chat-body">
+              <div class="message-bubble" id="wa-chat-bubble">
+                <!-- Rendered via JS -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Phone Mockup PWA -->
+        <div>
+          <h3 style="margin-bottom:16px;color:#fff;display:flex;align-items:center;gap:10px;">
+            <i class="fas fa-mobile-alt" style="color:var(--primary-gold);"></i> PWA do Cliente (Ficha Técnica & Fotos)
+          </h3>
+          <div class="phone-mockup" style="border-color:#333;">
+            <div class="phone-notch"></div>
+            <div class="phone-header" style="background:#161b26;">
+              <div class="phone-header-avatar" style="background:var(--primary-gold);color:#000;">P</div>
+              <div class="phone-header-info">
+                <h4>Ficha do Cliente • BarberMe</h4>
+                <p>Perfil PWA Web (Sem Download)</p>
+              </div>
+            </div>
+            <div class="pwa-container" id="pwa-spec-content">
+              <!-- Rendered via JS -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 3: VISÃO DO BARBEIRO (APP BALCÃO) -->
+    <section id="view-barbeiro" class="view-section">
+      <div class="grid-main-side">
+        <!-- Main Form: Ficha Técnica em 20 Segundos -->
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">
+              <i class="fas fa-clipboard-check"></i> Fechamento de Comanda & Ficha Técnica (20 Segundos)
+            </div>
+            <span class="badge badge-em-dia">Barbeiro: Rafael Silva</span>
+          </div>
+
+          <form id="form-haircut-spec">
+            <div class="form-group">
+              <label>Selecione o Cliente em Atendimento</label>
+              <select class="form-control" id="checkout-customer-select">
+                <!-- Rendered via JS -->
+              </select>
+            </div>
+
+            <div class="grid-2">
+              <div class="form-group">
+                <label>Pente Topo</label>
+                <input type="text" class="form-control" value="Tesoura (3cm - Pompadour)" required>
+              </div>
+              <div class="form-group">
+                <label>Pente Laterais / Fade</label>
+                <input type="text" class="form-control" value="Pente 1.5 (Mid Fade)" required>
+              </div>
+            </div>
+
+            <div class="grid-2">
+              <div class="form-group">
+                <label>Acabamento & Lâmina</label>
+                <input type="text" class="form-control" value="Navalhado com gel de barbear" required>
+              </div>
+              <div class="form-group">
+                <label>Produtos Aplicados</label>
+                <input type="text" class="form-control" value="Pomada Matte BarberMe, Balm Alinhador" required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Observações do Corte (Falta de cabelo, redemoinhos, alergias)</label>
+              <textarea class="form-control" rows="2">Redemoinho acentuado na coroa. Cliente prefere laterais baixas e barba alinhada com navalha.</textarea>
+            </div>
+
+            <div class="form-group">
+              <label>Foto do Antes e Depois (Portfólio & Ficha Visual)</label>
+              <div style="background:rgba(255,255,255,0.03);border:1px dashed var(--border-color);padding:16px;border-radius:var(--radius-sm);text-align:center;color:var(--text-muted);">
+                <i class="fas fa-camera" style="font-size:24px;margin-bottom:8px;color:var(--primary-gold);"></i>
+                <div style="font-size:13px;color:#fff;">Foto carregada: <strong>corte_1.jpg</strong></div>
+              </div>
+            </div>
+
+            <button type="submit" class="btn-primary" style="width:100%;">
+              <i class="fas fa-save"></i> Salvar Ficha Técnica & Recarregar Relógio (1 toque)
+            </button>
+          </form>
+        </div>
+
+        <!-- Sidebar Barbeiro Stats -->
+        <div style="display:flex;flex-direction:column;gap:20px;">
+          <div class="card">
+            <h4 style="color:#fff;margin-bottom:14px;display:flex;align-items:center;gap:8px;">
+              <i class="fas fa-wallet" style="color:var(--accent-emerald);"></i> Minhas Comissões (50%)
+            </h4>
+            <div style="margin-bottom:12px;">
+              <div style="font-size:12px;color:var(--text-muted);">Ganhos de Hoje</div>
+              <div style="font-size:28px;font-weight:800;color:var(--accent-emerald);" id="barber-today-earned">R$ 280,00</div>
+            </div>
+            <div>
+              <div style="font-size:12px;color:var(--text-muted);">Comissão Acumulada no Mês</div>
+              <div style="font-size:22px;font-weight:700;color:#fff;" id="barber-month-earned">R$ 4.250,00</div>
+            </div>
+          </div>
+
+          <div class="card" style="border-color:var(--primary-gold);">
+            <h4 style="color:#fff;margin-bottom:10px;display:flex;align-items:center;gap:8px;">
+              <i class="fas fa-calendar-check" style="color:var(--primary-gold);"></i> Preenchimento de Ociosidade
+            </h4>
+            <p style="font-size:13px;color:var(--text-muted);line-height:1.4;">
+              O motor preencheu <strong>3 horários vagos</strong> na sua Terça-feira com clientes que estavam na Janela exata do Relógio!
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 4: VISÃO DA ADMINISTRAÇÃO (DONO) -->
+    <section id="view-admin" class="view-section">
+      <div class="grid-3" style="margin-bottom:24px;">
+        <div class="stat-card emerald">
+          <span class="stat-label">Receita Recorrente Mensal (MRR Assinaturas)</span>
+          <span class="stat-value">R$ 14.850,00</span>
+          <span class="stat-sub"><i class="fas fa-arrow-up"></i> +22% vs mês anterior</span>
+        </div>
+        <div class="stat-card blue">
+          <span class="stat-label">Retenção de Base por Relógio</span>
+          <span class="stat-value" id="admin-active-clients">4 de 5</span>
+          <span class="stat-sub"><i class="fas fa-chart-line"></i> Ciclo ativo estável</span>
+        </div>
+        <div class="stat-card rose">
+          <span class="stat-label">Churn Invisível Evitado</span>
+          <span class="stat-value" id="admin-risk-clients">1 Cliente</span>
+          <span class="stat-sub warning"><i class="fas fa-shield-alt"></i> Janela +15d sob aviso</span>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">
+              <i class="fas fa-users-slash"></i> Cohort de Evasão (Churn Invisível)
+            </div>
+          </div>
+          <p style="font-size:13px;color:var(--text-muted);margin-bottom:16px;">
+            Clientes que ultrapassaram o intervalo médio em mais de 15 dias. O motor gera réguas automáticas de resgate.
+          </p>
+          <div style="padding:12px;background:rgba(244,63,94,0.1);border:1px solid rgba(244,63,94,0.3);border-radius:var(--radius-sm);margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;">
+            <div>
+              <strong style="color:#fff;">Marcelo Oliveira</strong>
+              <div style="font-size:12px;color:var(--text-muted);">52 dias sem cortar (Intervalo Médio: 30d)</div>
+            </div>
+            <span class="badge badge-em-risco">Risco Churn</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">
+              <i class="fas fa-award"></i> Índice de Padronização (Fichas Técnicas)
+            </div>
+          </div>
+          <p style="font-size:13px;color:var(--text-muted);margin-bottom:14px;">
+            A Ficha Técnica converte a memória do corte em ativo da barbearia. Se o barbeiro faltar, outro barbeiro entrega a mesma qualidade.
+          </p>
+          <div style="font-size:32px;font-weight:800;color:var(--primary-gold);margin-bottom:6px;">88.5%</div>
+          <div style="font-size:12px;color:var(--accent-emerald);"><i class="fas fa-check"></i> Redução de 74% no risco de perda de carteira</div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Application Script -->
+  <script src="app.js"></script>
+</body>
+</html>

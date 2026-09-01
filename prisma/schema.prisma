@@ -1,0 +1,109 @@
+// BarberMe - Schema do Banco de Dados (Prisma ORM com SQLite)
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum CustomerStatus {
+  EM_DIA
+  NA_JANELA
+  EM_RISCO
+  DORMENTE
+  PERDIDO
+}
+
+enum SubscriptionStatus {
+  ACTIVE
+  PAUSED
+  CANCELLED
+}
+
+model Barber {
+  id              String         @id @default(uuid())
+  name            String
+  phone           String
+  commissionPct   Float          @default(50.0)
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+
+  customers       Customer[]
+  appointments    Appointment[]
+  haircutSpecs    HaircutSpec[]
+}
+
+model Customer {
+  id                  String            @id @default(uuid())
+  name                String
+  phone               String            @unique
+  avgIntervalDays     Float             @default(21.0)
+  daysPassed          Int               @default(0)
+  status              CustomerStatus    @default(EM_DIA)
+  lastServiceDate     DateTime?
+  coldStartPhase      Int               @default(1)
+  
+  preferredBarberId   String?
+  preferredBarber     Barber?           @relation(fields: [preferredBarberId], references: [id])
+  
+  createdAt           DateTime          @default(now())
+  updatedAt           DateTime          @updatedAt
+
+  appointments        Appointment[]
+  haircutSpecs        HaircutSpec[]
+  subscriptions       SubscriptionContract[]
+}
+
+model HaircutSpec {
+  id              String        @id @default(uuid())
+  customerId      String
+  customer        Customer      @relation(fields: [customerId], references: [id])
+  barberId        String
+  barber          Barber        @relation(fields: [barberId], references: [id])
+  appointmentId   String?       @unique
+  appointment     Appointment?  @relation(fields: [appointmentId], references: [id])
+  
+  photoBeforeUrl  String?
+  photoAfterUrl   String?
+  topGuard        String        // Ex: "Tesoura 3cm"
+  sidesGuard      String        // Ex: "Pente 1.5 Fade"
+  finishGuard     String        // Ex: "Navalha"
+  productsUsed    String        // JSON array or CSV string
+  notes           String?
+  
+  createdAt       DateTime      @default(now())
+}
+
+model Appointment {
+  id              String        @id @default(uuid())
+  customerId      String
+  customer        Customer      @relation(fields: [customerId], references: [id])
+  barberId        String
+  barber          Barber        @relation(fields: [barberId], references: [id])
+  scheduledAt     DateTime
+  completedAt     DateTime?
+  price           Float
+  barberEarned    Float
+  status          String        @default("SCHEDULED") // SCHEDULED, COMPLETED, CANCELLED, NO_SHOW
+  
+  haircutSpec     HaircutSpec?
+  createdAt       DateTime      @default(now())
+}
+
+model SubscriptionContract {
+  id              String             @id @default(uuid())
+  customerId      String
+  customer        Customer           @relation(fields: [customerId], references: [id])
+  planName        String             // Ex: "Clube da Barba Prime"
+  monthlyPrice    Float
+  cutsPerMonth    Int
+  cutsRemaining   Int
+  status          SubscriptionStatus @default(ACTIVE)
+  renewsAt        DateTime
+  
+  createdAt       DateTime           @default(now())
+  updatedAt       DateTime           @updatedAt
+}
