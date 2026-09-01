@@ -6,6 +6,9 @@ on:
   pull_request:
     branches: [ main, develop ]
 
+env:
+  ACTIONS_ALLOW_USE_UNSECURE_NODE20: true
+
 jobs:
   # ---------------------------------------------------------
   # Estágio 1: Lint (Uncle Bob - Code Quality & Complexity)
@@ -16,7 +19,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
-        with: { node-version: 22, cache: 'npm' }
+        with: { node-version: '22.x', cache: 'npm' }
       - run: npm install --no-audit
       - run: npm run lint
 
@@ -30,7 +33,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
-        with: { node-version: 22, cache: 'npm' }
+        with: { node-version: '22.x', cache: 'npm' }
       - run: npm install --no-audit
       - run: npm run typecheck
 
@@ -44,7 +47,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
-        with: { node-version: 22, cache: 'npm' }
+        with: { node-version: '22.x', cache: 'npm' }
       - run: npm install --no-audit
       - run: npm run test:unit
 
@@ -58,7 +61,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
-        with: { node-version: 22, cache: 'npm' }
+        with: { node-version: '22.x', cache: 'npm' }
       - run: npm install --no-audit
       - run: npm run test:integration
 
@@ -72,7 +75,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
-        with: { node-version: 22, cache: 'npm' }
+        with: { node-version: '22.x', cache: 'npm' }
       - run: npm install --no-audit
       - run: npm run arch:check
       - run: npm run test:tenant
@@ -87,7 +90,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
-        with: { node-version: 22, cache: 'npm' }
+        with: { node-version: '22.x', cache: 'npm' }
       - run: npm install --no-audit
       - run: npm run schema:check
       - run: npm run test:migrations
@@ -102,7 +105,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
-        with: { node-version: 22, cache: 'npm' }
+        with: { node-version: '22.x', cache: 'npm' }
       - run: npm install --no-audit
       - run: npm run build
       - run: npm run budget:check
@@ -118,7 +121,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
-        with: { node-version: 22, cache: 'npm' }
+        with: { node-version: '22.x', cache: 'npm' }
       - run: npm install --no-audit
       - run: npm run build
       - name: 🎭 Instalar Navegador Chromium para Playwright
