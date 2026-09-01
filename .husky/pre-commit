@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-echo "🛡️ Executando Validação Estrita do Pipeline CI (0 Warnings, BDD & 8 Estágios)..."
+echo "🛡️ Executando Validação Estrita do Pipeline CI (0 Warnings, BDD, Observabilidade & 8 Estágios)..."
 
 # 1. Estágio Lint (max-warnings 0)
 npm run lint || { echo "❌ Bloqueado pelo Husky: O código contém avisos ou erros de linting!"; exit 1; }
@@ -18,16 +18,19 @@ npm run test:unit || { echo "❌ Bloqueado pelo Husky: Testes unitários falhara
 # 5. Estágio Integration Tests
 npm run test:integration || { echo "❌ Bloqueado pelo Husky: Testes de integração falharam!"; exit 1; }
 
-# 6. Estágio Tenant & Security Guard
+# 6. Estágio Observabilidade & Métricas Prometheus
+npm run obs:check || { echo "❌ Bloqueado pelo Husky: Endpoints /api/health ou /api/metrics falharam!"; exit 1; }
+
+# 7. Estágio Tenant & Security Guard
 npm run arch:check || { echo "❌ Bloqueado pelo Husky: Violação de limites de Clean Architecture!"; exit 1; }
 npm run test:tenant || { echo "❌ Bloqueado pelo Husky: Falha no teste de segurança multi-tenant!"; exit 1; }
 
-# 7. Estágio Migrations & Schema Check
+# 8. Estágio Migrations & Schema Check
 npm run schema:check || { echo "❌ Bloqueado pelo Husky: Desvio de schema de dados!"; exit 1; }
 npm run test:migrations || { echo "❌ Bloqueado pelo Husky: Falha na validação de migrações!"; exit 1; }
 
-# 8. Estágio Build & Performance Budget
+# 9. Estágio Build & Performance Budget
 npm run build || { echo "❌ Bloqueado pelo Husky: Falha na compilação do projeto!"; exit 1; }
 npm run budget:check || { echo "❌ Bloqueado pelo Husky: Orçamento de tamanho de bundle excedido!"; exit 1; }
 
-echo "✅ Todos os portões de qualidade e especificações BDD passaram com ZERO avisos! Liberando commit."
+echo "✅ Todos os portões de qualidade, BDD e observabilidade passaram com ZERO avisos! Liberando commit."

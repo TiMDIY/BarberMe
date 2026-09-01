@@ -20,6 +20,7 @@
     "arch:check": "depcruise --config .dependency-cruiser.cjs src",
     "budget:check": "npx tsx scripts/bundle-budget-check.ts",
     "schema:check": "npx tsx scripts/data-schema-check.ts",
+    "obs:check": "npx tsx scripts/observability-check.ts",
     "smoke": "npx tsx scripts/smoke-test.ts",
     "test": "npx vitest run",
     "test:coverage": "npx vitest run --coverage",

@@ -5,14 +5,14 @@
       "name": "Rafael Silva",
       "phone": "+55 11 91111-2222",
       "commission_pct": 50,
-      "created_at": "2026-09-01T16:13:14.022Z"
+      "created_at": "2026-09-01T16:30:23.426Z"
     },
     {
       "id": "barber-joao",
       "name": "João Carlos",
       "phone": "+55 11 93333-4444",
       "commission_pct": 50,
-      "created_at": "2026-09-01T16:13:14.022Z"
+      "created_at": "2026-09-01T16:30:23.429Z"
     }
   ],
   "customers": [
@@ -26,7 +26,7 @@
       "last_service_date": "2026-08-08T10:00:00.000Z",
       "cold_start_phase": 1,
       "preferred_barber_id": "barber-rafael",
-      "created_at": "2026-09-01T16:13:14.022Z"
+      "created_at": "2026-09-01T16:30:23.429Z"
     },
     {
       "id": "cust-2",
@@ -38,7 +38,7 @@
       "last_service_date": "2026-07-29T10:00:00.000Z",
       "cold_start_phase": 1,
       "preferred_barber_id": "barber-rafael",
-      "created_at": "2026-09-01T16:13:14.022Z"
+      "created_at": "2026-09-01T16:30:23.429Z"
     },
     {
       "id": "cust-3",
@@ -50,7 +50,7 @@
       "last_service_date": "2026-07-08T10:00:00.000Z",
       "cold_start_phase": 1,
       "preferred_barber_id": "barber-joao",
-      "created_at": "2026-09-01T16:13:14.022Z"
+      "created_at": "2026-09-01T16:30:23.429Z"
     }
   ],
   "haircutSpecs": [
@@ -66,7 +66,7 @@
       "finish_guard": "Navalha",
       "products_used": "[\"Pomada Matte BarberMe\",\"Óleo de Barba\"]",
       "notes": "Redemoinho acentuado na coroa.",
-      "created_at": "2026-09-01T16:13:14.022Z"
+      "created_at": "2026-09-01T16:30:23.429Z"
     }
   ],
   "appointments": [],
@@ -77,10 +77,10 @@
       "plan_name": "Clube da Barba Prime (2x/mês)",
       "monthly_price": 69.9,
       "cuts_per_month": 2,
-      "cuts_remaining": 1,
+      "cuts_remaining": 2,
       "status": "ACTIVE",
       "renews_at": "2026-09-08T00:00:00.000Z",
-      "created_at": "2026-09-01T16:13:14.022Z"
+      "created_at": "2026-09-01T16:30:23.429Z"
     }
   ]
 }

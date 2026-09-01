@@ -9,6 +9,8 @@ import { whatsAppAutomation } from './services/whatsapp-automation.js';
 import { pwaClientService } from './services/pwa-client.js';
 import { subscriptionService } from './services/subscription-service.js';
 import { adminAnalyticsService } from './services/admin-analytics.js';
+import { logger } from './services/logger.js';
+import { metricsCollector } from './services/metrics.js';
 
 if (db.customers.length === 0) {
   seedTestData();
@@ -64,6 +66,30 @@ function serveStaticFile(reqPath: string, res: http.ServerResponse) {
     res.writeHead(404, { 'Content-Type': 'text/plain' });
     res.end('404 Not Found');
   }
+}
+
+async function handleObservabilityRoutes(req: http.IncomingMessage, res: http.ServerResponse, pathname: string): Promise<boolean> {
+  if (req.method === 'GET' && pathname === '/api/health') {
+    sendJson(res, 200, {
+      status: 'UP',
+      timestamp: new Date().toISOString(),
+      uptimeSeconds: Number(process.uptime().toFixed(2)),
+      dbStatus: 'CONNECTED',
+      customersTotal: db.customers.length,
+      subscriptionsTotal: db.subscriptions.length
+    });
+    return true;
+  }
+  if (req.method === 'GET' && pathname === '/api/metrics') {
+    const metricsContent = metricsCollector.generatePrometheusMetrics();
+    res.writeHead(200, {
+      'Content-Type': 'text/plain; version=0.0.4; charset=utf-8',
+      'Access-Control-Allow-Origin': '*'
+    });
+    res.end(metricsContent);
+    return true;
+  }
+  return false;
 }
 
 async function handleCustomerRoutes(req: http.IncomingMessage, res: http.ServerResponse, pathname: string): Promise<boolean> {
@@ -150,7 +176,31 @@ async function handleAdminAndProfileRoutes(req: http.IncomingMessage, res: http.
   return false;
 }
 
+function logAndRecordMetrics(req: http.IncomingMessage, res: http.ServerResponse, pathname: string, startTime: number, traceId: string) {
+  const durationMs = Date.now() - startTime;
+  metricsCollector.recordRequest({
+    method: req.method || 'GET',
+    route: pathname,
+    statusCode: res.statusCode,
+    durationMs
+  });
+
+  if (pathname.startsWith('/api/')) {
+    logger.info(`HTTP ${req.method} ${pathname} - ${res.statusCode}`, {
+      traceId,
+      route: pathname,
+      method: req.method,
+      statusCode: res.statusCode,
+      durationMs
+    });
+  }
+}
+
 export const server = http.createServer(async (req, res) => {
+  const startTime = Date.now();
+  const traceId = `tr-${Date.now()}-${Math.random().toString(36).substring(2, 7)}`;
+  res.setHeader('x-trace-id', traceId);
+
   const url = new URL(req.url || '/', `http://${req.headers.host || 'localhost'}`);
   if (req.method === 'OPTIONS') {
     res.writeHead(204, { 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, POST, OPTIONS', 'Access-Control-Allow-Headers': 'Content-Type' });
@@ -158,7 +208,8 @@ export const server = http.createServer(async (req, res) => {
     return;
   }
 
-  const handled = (await handleCustomerRoutes(req, res, url.pathname)) ||
+  const handled = (await handleObservabilityRoutes(req, res, url.pathname)) ||
+                  (await handleCustomerRoutes(req, res, url.pathname)) ||
                   (await handleBarberAndPwaRoutes(req, res, url.pathname)) ||
                   (await handleBusinessRoutes(req, res, url.pathname)) ||
                   (await handleAdminAndProfileRoutes(req, res, url.pathname));
@@ -166,11 +217,13 @@ export const server = http.createServer(async (req, res) => {
   if (!handled) {
     serveStaticFile(url.pathname, res);
   }
+
+  logAndRecordMetrics(req, res, url.pathname, startTime, traceId);
 });
 
 if (process.env.NODE_ENV !== 'test' && process.env.NO_AUTO_SERVER !== 'true') {
   const PORT = process.env.PORT || 3000;
   server.listen(PORT, () => {
-    console.log(`💈 BarberMe Operational REST Server rodando em http://localhost:${PORT}`);
+    logger.info(`💈 BarberMe Operational REST Server rodando em http://localhost:${PORT}`);
   });
 }
