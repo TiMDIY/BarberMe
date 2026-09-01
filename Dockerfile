@@ -5,7 +5,7 @@ WORKDIR /app
 
 # Copiar manifesto de dependências
 COPY package*.json ./
-RUN npm ci
+RUN npm install --no-audit
 
 # Copiar código fonte e compilar
 COPY tsconfig.json ./
@@ -20,7 +20,7 @@ ENV NODE_ENV=production
 ENV PORT=3000
 
 COPY package*.json ./
-RUN npm ci --only=production
+RUN npm install --only=production --no-audit
 
 COPY --from=builder /app/dist ./dist
 COPY index.html styles.css app.js ./
