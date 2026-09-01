@@ -8,7 +8,7 @@
   },
   "scripts": {
     "start": "node dist/src/server.js",
-    "lint": "eslint src/ tests/ scripts/",
+    "lint": "eslint src/ tests/ scripts/ --max-warnings 0",
     "typecheck": "npx tsc --noEmit",
     "test:unit": "npx vitest run tests/clock-engine.test.ts tests/db.test.ts",
     "test:integration": "npx vitest run tests/server.test.ts tests/subscription.test.ts tests/whatsapp-automation.test.ts tests/pwa-client.test.ts tests/admin-analytics.test.ts",

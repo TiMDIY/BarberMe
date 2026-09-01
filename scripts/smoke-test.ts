@@ -10,7 +10,7 @@ async function runSmokeTest() {
   const { server } = await import('../src/server.js');
 
   let testServer: Server;
-  let baseUrl: string;
+  let baseUrl = '';
 
   await new Promise<void>((resolve) => {
     testServer = server.listen(0, () => {
