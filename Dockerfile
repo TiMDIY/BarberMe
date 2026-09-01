@@ -9,9 +9,9 @@ RUN npm install --no-audit
 
 # Copiar arquivos de configuração e código fonte completo para o build
 COPY tsconfig.json vitest.config.ts .dependency-cruiser.cjs ./
-COPY src/ ./src
-COPY tests/ ./tests
-COPY scripts/ ./scripts
+COPY src ./src
+COPY tests ./tests
+COPY scripts ./scripts
 
 # Compilar aplicação em dist/
 RUN npm run build
@@ -28,7 +28,7 @@ RUN npm install --omit=dev --no-audit
 
 COPY --from=builder /app/dist ./dist
 COPY index.html styles.css app.js ./
-COPY assets/ ./assets
+COPY assets ./assets
 
 EXPOSE 3000
 
